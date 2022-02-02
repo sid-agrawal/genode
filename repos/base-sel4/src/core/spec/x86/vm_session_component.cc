@@ -197,6 +197,7 @@ Vm_session_component::~Vm_session_component()
 }
 
 
+// siagraw: How to do VMM
 Capability<Vm_session::Native_vcpu> Vm_session_component::create_vcpu(Thread_capability const cap)
 {
 	if (!cap.valid())

@@ -336,6 +336,7 @@ class Loader::Session_component : public Rpc_object<Session>
 			_fault_sigh = sigh;
 		}
 
+// siagraw: loaders' start
 		void start(Name const &binary_name, Name const &label) override
 		{
 			if (_child.constructed()) {

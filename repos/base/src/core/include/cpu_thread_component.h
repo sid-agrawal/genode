@@ -46,6 +46,7 @@ class Genode::Cpu_thread_component : public  Rpc_object<Cpu_thread>,
 
 		Rpc_entrypoint           &_ep;
 		Pager_entrypoint         &_pager_ep;
+		// siagraw: For thread-stack this needs to be different AS
 		Region_map_component     &_address_space_region_map;
 		Cpu_session::Weight const _weight;
 		Session_label       const _session_label;
@@ -153,6 +154,7 @@ class Genode::Cpu_thread_component : public  Rpc_object<Cpu_thread>,
 		                     unsigned                   priority,
 		                     addr_t                     utcb)
 		:
+		//siagraw: There is where the PD binding happens.
 			_ep(ep), _pager_ep(pager_ep),
 			_address_space_region_map(pd.address_space_region_map()),
 			_weight(weight),

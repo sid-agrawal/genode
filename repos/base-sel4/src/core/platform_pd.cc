@@ -51,7 +51,7 @@ Bit_allocator<1024> &Platform_pd::pd_id_alloc()
 	return inst;
 }
 
-
+// siagraw: This also looks interesting.
 bool Platform_pd::bind_thread(Platform_thread &thread)
 {
 	try {

@@ -132,6 +132,7 @@ struct Genode::Cpu_thread : Interface
 	 ** RPC declaration **
 	 *********************/
 
+	// siagraw: Add a new one here to attach to a new AS
 	GENODE_RPC(Rpc_utcb, Dataspace_capability, utcb);
 	GENODE_RPC(Rpc_start, void, start, addr_t, addr_t);
 	GENODE_RPC(Rpc_pause, void, pause);

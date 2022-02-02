@@ -50,6 +50,7 @@ struct Libc::Clone_session : Session
 };
 
 
+// siagraw: crux of clone copy
 struct Libc::Clone_connection : Connection<Clone_session>,
                                 Rpc_client<Clone_session>
 {
