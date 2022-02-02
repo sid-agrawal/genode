@@ -26,5 +26,8 @@ void Component::construct(Genode::Env &env)
 	int const sum = hello.add(2, 5);
 	Genode::log("added 2 + 5 = ", sum);
 
+	int const product = hello.mult(2, 5);
+	Genode::log("product 2 * 5 = ", product);
+
 	Genode::log("hello test completed");
 }

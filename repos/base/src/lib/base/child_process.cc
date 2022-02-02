@@ -35,6 +35,8 @@ Child::Process::Loaded_executable::Loaded_executable(Type type,
 	if (type == TYPE_FORKED)
 		return;
 
+    Genode::log("Loading child executable");
+	
 	/* locally attach ELF binary of the dynamic linker */
 	if (!ldso_ds.valid()) {
 		error("attempt to start dynamic executable without dynamic linker");

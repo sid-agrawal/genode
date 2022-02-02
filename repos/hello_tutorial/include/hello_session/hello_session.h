@@ -28,6 +28,7 @@ struct Hello::Session : Genode::Session
 
 	virtual void say_hello() = 0;
 	virtual int add(int a, int b) = 0;
+	virtual int mult(int a, int b) = 0;
 
 
 	/*******************
@@ -36,6 +37,8 @@ struct Hello::Session : Genode::Session
 
 	GENODE_RPC(Rpc_say_hello, void, say_hello);
 	GENODE_RPC(Rpc_add, int, add, int, int);
+	GENODE_RPC(Rpc_mult, int, add, int, int);
+	
 
 	GENODE_RPC_INTERFACE(Rpc_say_hello, Rpc_add);
 };

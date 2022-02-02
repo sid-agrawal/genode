@@ -37,6 +37,10 @@ struct Hello::Session_client : Genode::Rpc_client<Session>
 	{
 		return call<Rpc_add>(a, b);
 	}
+	int mult(int a, int b) override
+	{
+		return call<Rpc_add>(a, b);
+	}
 };
 
 #endif /* _INCLUDE__HELLO_SESSION_H__CLIENT_H_ */

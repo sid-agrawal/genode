@@ -33,6 +33,9 @@ struct Hello::Session_component : Genode::Rpc_object<Session>
 
 	int add(int a, int b) override {
 		return a + b; }
+	
+	int mult(int a, int b) override {
+		return a * b; }
 };
 
 
