@@ -350,7 +350,7 @@ Mapping Region_map_component::create_map_item(Region_map_component *,
 	                 .executable     = region.executable() };
 }
 
-
+// siagraw: This is the right attach.
 Region_map::Local_addr
 Region_map_component::attach(Dataspace_capability ds_cap, size_t size,
                              off_t offset, bool use_local_addr,
@@ -645,9 +645,16 @@ Region_map::State Region_map_component::state()
 	/* otherwise return fault information regarding the first faulter */
 	_faulters.head([&] (Rm_faulter &faulter) {
 		result = faulter.fault_state(); });
+	
+	log("Sid is hacking");
 	return result;
 }
 
+
+void Region_map_component::print_regions()
+{
+	log("Sid is hacking, more");
+}
 
 static Dataspace_capability
 _type_deduction_helper(Dataspace_capability cap) { return cap; }

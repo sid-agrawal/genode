@@ -706,6 +706,7 @@ void Genode::init_ldso_phdr(Env &env)
 		void fault_handler(Signal_context_capability) override { }
 
 		State state() override { throw Not_implemented(); }
+		void print_regions() override { throw Not_implemented(); }
 
 		Dataspace_capability dataspace() override { throw Not_implemented(); }
 

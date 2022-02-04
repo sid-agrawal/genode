@@ -460,6 +460,7 @@ class Genode::Region_map_component : private Weak_object<Region_map_component>,
 		void             detach        (Local_addr) override;
 		void             fault_handler (Signal_context_capability handler) override;
 		State            state         () override;
+		void			 print_regions () override;
 
 		Dataspace_capability dataspace () override { return _ds_cap; }
 };

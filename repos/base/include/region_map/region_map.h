@@ -152,6 +152,7 @@ struct Genode::Region_map : Interface
 	 * Request current state of region map
 	 */
 	virtual State state() = 0;
+	virtual void print_regions() = 0;
 
 	/**
 	 * Return dataspace representation of region map
@@ -171,9 +172,10 @@ struct Genode::Region_map : Interface
 	GENODE_RPC(Rpc_detach, void, detach, Local_addr);
 	GENODE_RPC(Rpc_fault_handler, void, fault_handler, Signal_context_capability);
 	GENODE_RPC(Rpc_state, State, state);
+	GENODE_RPC(Rpc_print_regions, void, print_regions);
 	GENODE_RPC(Rpc_dataspace, Dataspace_capability, dataspace);
 
-	GENODE_RPC_INTERFACE(Rpc_attach, Rpc_detach, Rpc_fault_handler, Rpc_state,
+	GENODE_RPC_INTERFACE(Rpc_attach, Rpc_detach, Rpc_fault_handler, Rpc_state, Rpc_print_regions,
 	                     Rpc_dataspace);
 };
 

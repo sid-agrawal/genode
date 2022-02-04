@@ -377,7 +377,7 @@ _ZTVN6Genode10Vm_sessionE D 56
 _ZTVN6Genode11Sliced_heapE D 72
 _ZTVN6Genode14Rpc_entrypointE D 80
 _ZTVN6Genode14Signal_contextE D 32
-_ZTVN6Genode17Region_map_clientE D 72
+_ZTVN6Genode17Region_map_clientE D 80
 _ZTVN6Genode17Rm_session_clientE D 48
 _ZTVN6Genode17Timeout_schedulerE D 112
 _ZTVN6Genode18Allocator_avl_baseE D 128
