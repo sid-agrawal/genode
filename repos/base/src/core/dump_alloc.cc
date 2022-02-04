@@ -37,3 +37,26 @@ void Genode::Allocator_avl_base::print(Genode::Output & out) const
 	      " MB) / mem_avail=" , mem_avail , " (" , mem_avail / 1024 / 1024 ,
 	      " MB)\n");
 }
+
+void Genode::Allocator_avl_base::printtolog() const
+{
+	unsigned long mem_size  = 0;
+	unsigned long mem_avail = 0;
+
+	Genode::log("Allocator ", this, " dump:\n");
+
+	_addr_tree.for_each([&] (Block const & b)
+	{
+		Genode::log(" Block: ", Hex_range<addr_t>(b.addr(), b.size()), " "
+		      "size=",      Number_of_bytes(b.size()), " "
+		      "avail=",     Number_of_bytes(b.avail()), " "
+		      "free=",      Number_of_bytes(b.used()), " "
+		      "max_avail=", Number_of_bytes(b.max_avail()), "\n");
+		mem_size  += b.size();
+		mem_avail += b.avail();
+	});
+
+	Genode::log( " => mem_size=", mem_size, " (", mem_size / 1024 / 1024 ,
+	      " MB) / mem_avail=" , mem_avail , " (" , mem_avail / 1024 / 1024 ,
+	      " MB)\n");
+}

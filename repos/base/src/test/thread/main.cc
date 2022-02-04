@@ -25,6 +25,9 @@
 #include <cpu_thread/client.h>
 #include <cpu/memory_barrier.h>
 
+#include <rm_session/connection.h>
+#include <region_map/client.h>
+
 using namespace Genode;
 
 
@@ -71,6 +74,7 @@ class Helper : Thread
 };
 
 
+__attribute__((unused))
 static void test_stack_alloc(Env &env)
 {
 	log("running '", __func__, "'");
@@ -145,6 +149,9 @@ static void test_stack_alignment(Env &env)
 
 	log_stack_address("main");
 	test_stack_alignment_varargs("%f\n%g\n", 3.142, 2.718);
+	
+	Genode::Region_map &rm(env.rm());
+	rm.print_regions();
 }
 
 
@@ -152,6 +159,7 @@ static void test_stack_alignment(Env &env)
  ** Main-thread stack area **
  ****************************/
 
+__attribute__((unused))
 static void test_main_thread()
 {
 	log("running '", __func__, "'");
@@ -208,6 +216,7 @@ struct Cpu_helper : Thread
 };
 
 
+__attribute__((unused))
 static void test_cpu_session(Env &env)
 {
 	log("running '", __func__, "'");
@@ -257,6 +266,7 @@ struct Pause_helper : Thread
 };
 
 
+__attribute__((unused))
 static void test_pause_resume(Env &env)
 {
 	log("running '", __func__, "'");
@@ -298,6 +308,7 @@ static void test_pause_resume(Env &env)
  * Test to check that core as the used kernel behaves well if up to the
  * supported Genode maximum threads are created.
  */
+__attribute__((unused))
 static void test_create_as_many_threads(Env &env)
 {
 	log("running '", __func__, "'");
@@ -382,6 +393,7 @@ struct Lock_helper : Thread
 	}
 };
 
+__attribute__((unused))
 static void test_locks(Genode::Env &env)
 {
 	Blockade lock;
@@ -491,6 +503,7 @@ struct Cxa_helper : Thread
 	}
 };
 
+__attribute__((unused))
 static void test_cxa_guards(Env &env)
 {
 	log("running '", __func__, "'");
@@ -670,6 +683,7 @@ struct Create_destroy_helper : Thread
 	}
 };
 
+__attribute__((unused))
 static void test_successive_create_destroy_threads(Env &env)
 {
 	log("running '", __func__, "'");
@@ -687,6 +701,7 @@ static void test_successive_create_destroy_threads(Env &env)
  ** Test destruction of inter-dependent CPU sessions **
  ******************************************************/
 
+__attribute__((unused))
 static void test_destroy_dependent_cpu_sessions(Env &env)
 {
 	log("destroy dependent CPU sessions in wrong order");
@@ -708,25 +723,26 @@ void Component::construct(Env &env)
 
 	try {
 
-		test_destroy_dependent_cpu_sessions(env);
+		// test_destroy_dependent_cpu_sessions(env);
 
-		test_stack_alloc(env);
+		// test_stack_alloc(env);
 		test_stack_alignment(env);
-		test_main_thread();
-		test_cpu_session(env);
-		if (config.xml().attribute_value("prio", false)) {
-			test_locks(env);
-			test_cxa_guards(env);
-		}
-		if (config.xml().attribute_value("pause_resume", false))
-			test_pause_resume(env);
+		// test_main_thread();
+		// test_cpu_session(env);
+		// if (config.xml().attribute_value("prio", false)) {
+		// 	test_locks(env);
+		// 	test_cxa_guards(env);
+		// }
+		// if (config.xml().attribute_value("pause_resume", false))
+		// 	test_pause_resume(env);
 
-		test_create_as_many_threads(env);
-		test_successive_create_destroy_threads(env);
+		// test_create_as_many_threads(env);
+		// test_successive_create_destroy_threads(env);
 	} catch (int error) {
 		Genode::error("error ", error);
 		throw;
 	}
+
 
 	log("--- test completed successfully ---");
 }

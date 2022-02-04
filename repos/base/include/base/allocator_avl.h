@@ -256,6 +256,7 @@ class Genode::Allocator_avl_base : public Range_allocator
 		bool any_block_addr(addr_t *out_addr);
 
 		void print(Output &out) const;
+		void printtolog() const;
 
 
 		/*******************************

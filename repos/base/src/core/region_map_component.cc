@@ -653,7 +653,9 @@ Region_map::State Region_map_component::state()
 
 void Region_map_component::print_regions()
 {
-	log("Sid is hacking, more");
+	Genode::log("Sid's new func: start");
+	_map.printtolog();
+	Genode::log("Sid's new func: end");
 }
 
 static Dataspace_capability
