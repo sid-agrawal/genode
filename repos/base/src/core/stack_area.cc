@@ -122,6 +122,7 @@ class Stack_area_region_map : public Region_map
 		void fault_handler(Signal_context_capability) override { }
 
 		State state() override { return State(); }
+		void print_regions() override {  }
 
 		Dataspace_capability dataspace() override { return Dataspace_capability(); }
 };
