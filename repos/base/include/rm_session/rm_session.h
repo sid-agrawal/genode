@@ -48,6 +48,12 @@ struct Genode::Rm_session : Session
 	 */
 	virtual void destroy(Capability<Region_map>) = 0;
 
+	/**
+	 * Duplicate region map
+	 */
+	//virtual Capability<Region_map> duplicate(Capability<Region_map>) = 0;
+
+
 
 	/*********************
 	 ** RPC declaration **
@@ -56,6 +62,7 @@ struct Genode::Rm_session : Session
 	GENODE_RPC_THROW(Rpc_create, Capability<Region_map>, create,
 	                 GENODE_TYPE_LIST(Out_of_ram, Out_of_caps), size_t);
 	GENODE_RPC(Rpc_destroy, void, destroy, Capability<Region_map>);
+//	GENODE_RPC(Rpc_duplicate, Capability<Region_map>, dublicate, Capability<Region_map>);
 
 	GENODE_RPC_INTERFACE(Rpc_create, Rpc_destroy);
 };

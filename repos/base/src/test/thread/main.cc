@@ -150,8 +150,8 @@ static void test_stack_alignment(Env &env)
 	log_stack_address("main");
 	test_stack_alignment_varargs("%f\n%g\n", 3.142, 2.718);
 	
-	Genode::Region_map &rm(env.rm());
-	rm.print_regions();
+// 	Genode::Region_map &rm(env.rm());
+// 	rm.print_regions();
 }
 
 

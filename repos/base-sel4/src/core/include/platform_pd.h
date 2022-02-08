@@ -82,6 +82,7 @@ class Genode::Platform_pd : public Address_space
 		 * Bind thread to protection domain
 		 */
 		bool bind_thread(Platform_thread &);
+		//bool bind_thread_as(Platform_thread &);
 
 		/**
 		 * Unbind thread from protection domain

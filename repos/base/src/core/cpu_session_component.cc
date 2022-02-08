@@ -32,6 +32,7 @@ Thread_capability Cpu_session_component::create_thread(Capability<Pd_session> pd
                                                        Weight weight,
                                                        addr_t utcb)
 {
+	warning("4\t", __FILE__,"->" ,__func__,"->" ,__LINE__);
 	Trace::Thread_name thread_name(name.string());
 
 	withdraw(Ram_quota{_utcb_quota_size()});

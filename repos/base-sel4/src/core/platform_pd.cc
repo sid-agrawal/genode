@@ -54,6 +54,7 @@ Bit_allocator<1024> &Platform_pd::pd_id_alloc()
 // siagraw: This also looks interesting.
 bool Platform_pd::bind_thread(Platform_thread &thread)
 {
+	warning("4.6\t", __FILE__,"->" ,__func__,"->" ,__LINE__);
 	try {
 		/* allocate fault handler selector in the PD's CSpace */
 		thread._fault_handler_sel = alloc_sel();
@@ -204,6 +205,7 @@ Platform_pd::Platform_pd(Allocator &md_alloc, char const *label)
 	          _id,
 	          _page_table_registry,
 	          label),
+	/* This reminds me of M2 from aos */
 	_cspace_cnode_1st(platform_specific().core_cnode().sel(),
 	                  platform_specific().core_sel_alloc().alloc(),
 	                  CSPACE_SIZE_LOG2_1ST,

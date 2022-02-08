@@ -44,6 +44,7 @@ void Cpu_thread_component::start(addr_t ip, addr_t sp)
 	_platform_thread.start((void *)ip, (void *)sp);
 }
 
+// siagraw: attach
 
 void Cpu_thread_component::pause()
 {

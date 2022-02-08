@@ -14,6 +14,7 @@
 /* Genode includes */
 #include <base/log.h>
 #include <util/string.h>
+#include <os/backtrace.h>
 
 /* core includes */
 #include <platform_thread.h>
@@ -140,6 +141,7 @@ static void prepopulate_ipc_buffer(addr_t ipc_buffer_phys, Cap_sel ep_sel,
  ** Platform_thread interface **
  *******************************/
 
+// Duplicate this for attach
 int Platform_thread::start(void *ip, void *sp, unsigned int)
 {
 	ASSERT(_pd);
@@ -225,6 +227,8 @@ Platform_thread::Platform_thread(size_t, const char *name, unsigned priority,
 	_priority((uint16_t)(Cpu_session::scale_priority(CONFIG_NUM_PRIORITIES, priority)))
 
 {
+	warning("4.5\t", __FILE__,"->" ,__func__,"->" ,__LINE__);
+
 	static_assert(CONFIG_NUM_PRIORITIES == 256, " unknown priority configuration");
 
 	if (_priority > 0)

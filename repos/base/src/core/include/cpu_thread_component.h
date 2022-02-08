@@ -170,7 +170,9 @@ class Genode::Cpu_thread_component : public  Rpc_object<Cpu_thread>,
 			           _platform_thread.affinity(),
 			           pd.label(), name)
 		{
+			warning("5\t", __FILE__,"->" ,__func__,"->" ,__LINE__);
 			_pager_ep.manage(_rm_client);
+
 
 			_address_space_region_map.add_client(_rm_client);
 			_platform_thread.pager(_rm_client);

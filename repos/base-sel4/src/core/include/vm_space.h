@@ -32,6 +32,7 @@
 namespace Genode { class Vm_space; }
 
 
+// siagraw: Make sure we follow this.
 class Genode::Vm_space
 {
 	private:

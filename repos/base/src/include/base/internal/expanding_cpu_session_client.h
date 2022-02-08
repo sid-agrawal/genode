@@ -42,6 +42,7 @@ struct Genode::Expanding_cpu_session_client : Upgradeable_client<Genode::Cpu_ses
 	create_thread(Pd_session_capability pd, Name const &name,
 	              Affinity::Location location, Weight weight, addr_t utcb) override
 	{
+		warning("3\t", __FILE__,"->" ,__func__,"->" ,__LINE__);
 		return retry<Out_of_ram>(
 			[&] () {
 				return retry<Out_of_caps>(

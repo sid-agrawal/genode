@@ -194,6 +194,9 @@ void nested_regions(Genode::Env &env)
 
 	if (fault_handler.fault_count() != 1)
 		error(" could read memory without region attached, value=", Hex(value));
+	
+	Genode::Region_map &rmm(env.rm());
+	rmm.print_regions();
 }
 
 

@@ -48,6 +48,7 @@ struct Genode::Cpu_connection : Connection<Cpu_session>, Cpu_session_client
 	                                Weight                 weight,
 	                                addr_t                 utcb = 0) override
 	{
+		warning("4\t", __FILE__,"->" ,__func__,"->" ,__LINE__);
 		return retry_with_upgrade(Ram_quota{8*1024}, Cap_quota{2}, [&] () {
 			return Cpu_session_client::create_thread(pd, name, affinity, weight, utcb); });
 	}

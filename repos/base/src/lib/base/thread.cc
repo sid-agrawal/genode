@@ -229,11 +229,14 @@ Thread::Thread(size_t weight, const char *name, size_t stack_size,
 : Thread(weight, name, stack_size, type, nullptr, affinity) { }
 
 
+// siagraw: This is the main place.
 Thread::Thread(Env &env, Name const &name, size_t stack_size, Location location,
                Weight weight, Cpu_session &cpu)
 : Thread(weight.value, name.string(), stack_size, NORMAL,
          &cpu == &env.cpu() ? nullptr : &cpu, location)
-{ }
+{
+	warning("1\t", __FILE__,"->" ,__func__,"->" ,__LINE__);
+ }
 
 
 Thread::Thread(Env &env, Name const &name, size_t stack_size)

@@ -68,6 +68,7 @@ void Thread::_deinit_platform_thread()
 
 void Thread::start()
 {
+	warning("2\t", __FILE__,"->" ,__func__,"->" ,__LINE__);
 	_init_cpu_session_and_trace_control();
 
 	/* create thread at core */
