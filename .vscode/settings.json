@@ -24,7 +24,8 @@
                 "streambuf": "cpp",
                 "system_error": "cpp",
                 "thread": "cpp",
-                "tuple": "cpp"
+                "tuple": "cpp",
+                "*.inc": "cpp"
         },
                 "files.exclude": {
                         "repos/base-okl4/**": true,

@@ -141,7 +141,7 @@ install_config {
 			</vfs>
 			<libc stdout="/dev/log" stderr="/dev/log" rtc="/dev/rtc"
 			      rng="/dev/random" socket="/socket"/>
-			<fetch url="https://genode.org/about/LICENSE" path="/dev/log" retry="3"/>
+			<fetch url="https://sid-agrawal.ca" path="/dev/log" retry="3"/>
 		</config>
 	</start>
 </config>

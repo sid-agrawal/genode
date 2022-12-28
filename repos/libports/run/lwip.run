@@ -164,4 +164,7 @@ if {![regexp {Welcome to our lwIP HTTP server!} $website dummy]} {
 	exit 2;
 }
 
+puts "Sleeping for 10 seconds, quickly open a browser"
+sleep 10
+
 # vi: set ft=tcl :
