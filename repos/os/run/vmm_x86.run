@@ -96,7 +96,7 @@ if {[have_spec linux]} {
 
 build_boot_image $boot_modules
 
-append qemu_args " -cpu phenom -smp 2"
+append qemu_args " -cpu host -smp 2 -enable-kvm"
 append qemu_args " -nographic "
 
 #run_genode_until {.*vcpu 1 : 7\. vm exit -.*\n} 20
