@@ -16,7 +16,6 @@ if { ![have_board imx7d_sabre] && ![have_board imx8q_evk] &&
 create_boot_directory
 import_from_depot [depot_user]/src/[base_src] \
                   [depot_user]/src/init \
-                  [depot_user]/src/libc \
                   [depot_user]/src/log_terminal \
                   [depot_user]/src/nic_router \
                   [depot_user]/src/terminal_crosslink \
@@ -45,7 +44,7 @@ proc vmm_config { } {
 		return {
 		<config kernel_rom="linux" initrd_rom="initrd" ram_size="128M"
 		        cpu_count="4" cpu_type="arm,cortex-a53" gic_version="3"
-		        bootargs="rdinit=/bin/sh ip=dhcp console=hvc0">
+		        bootargs="rdinit=/bin/sh +m ip=dhcp console=hvc0">
 			<virtio_device name="hvc0" type="console"/>
 			<virtio_device name="eth0" type="net"/>
 			<virtio_device name="blk0" type="block"/>
