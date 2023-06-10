@@ -79,6 +79,7 @@ class Genode::Pd_session_component : public Session_object<Pd_session>
 
 		enum Cap_type { RPC_CAP, DS_CAP, SIG_SOURCE_CAP, SIG_CONTEXT_CAP, IGN_CAP };
 
+		/*siagraw: This could be useful */
 		char const *_name(Cap_type type)
 		{
 			switch (type) {

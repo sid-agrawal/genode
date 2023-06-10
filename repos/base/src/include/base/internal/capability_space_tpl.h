@@ -63,7 +63,7 @@ namespace Genode { namespace Capability_space {
 	Native_capability import(Rpc_destination, Rpc_obj_key);
 } }
 
-
+/*(siagraw)*/
 /**
  * Capability space template
  *
@@ -145,8 +145,11 @@ class Genode::Capability_space_tpl
 		 */
 		template <typename... ARGS>
 		Native_capability::Data &create_capability(ARGS... args)
+		/*siagraw*/
 		{
 			Mutex::Guard guard(_mutex);
+
+			Genode::log("0----------", args)
 
 			addr_t const index = _alloc.alloc();
 
@@ -197,6 +200,7 @@ class Genode::Capability_space_tpl
 
 		Native_capability lookup(Rpc_obj_key rpc_obj_key)
 		{
+			Genode::log("prints")
 			Native_capability::Data *data = _lookup(rpc_obj_key);
 			return data ? Native_capability(data) : Native_capability();
 		}

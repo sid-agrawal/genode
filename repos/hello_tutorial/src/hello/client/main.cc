@@ -19,7 +19,9 @@
 
 void Component::construct(Genode::Env &env)
 {
+	Genode::log("\tCAP_Quota: ", env.pd().cap_quota());
 	Hello::Connection hello(env);
+	Genode::log("\tCAP_Quota: ", env.pd().cap_quota());
 
 	hello.say_hello();
 
@@ -27,4 +29,5 @@ void Component::construct(Genode::Env &env)
 	Genode::log("added 2 + 5 = ", sum);
 
 	Genode::log("hello test completed");
+
 }

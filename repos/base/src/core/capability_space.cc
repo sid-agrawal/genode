@@ -28,7 +28,6 @@ struct Genode::Native_capability::Data : Capability_data
 
 	Data(Rpc_destination dst, Rpc_obj_key key)
 	: Capability_data(key), dst(dst) { }
-
 	Data() { }
 };
 
@@ -74,6 +73,7 @@ void Capability_space::inc_ref(Native_capability::Data &data)
 
 Rpc_obj_key Capability_space::rpc_obj_key(Native_capability::Data const &data)
 {
+	    warning("Looking up stuff", data);
 	return local_capability_space().rpc_obj_key(data);
 }
 

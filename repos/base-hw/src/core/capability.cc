@@ -12,6 +12,7 @@
  */
 
 #include <base/internal/capability_space.h>
+#include <base/log.h>
 
 using namespace Genode;
 

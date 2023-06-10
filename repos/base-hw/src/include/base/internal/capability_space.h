@@ -16,6 +16,7 @@
 
 /* Genode includes */
 #include <base/capability.h>
+#include <base/log.h>
 
 /* base-hw includes */
 #include <kernel/interface.h>
@@ -27,6 +28,7 @@ namespace Genode { namespace Capability_space {
 	 */
 	static inline Kernel::capid_t capid(Native_capability const &cap)
 	{
+		// Genode::log("inside the right place?");
 		return (Kernel::capid_t)((addr_t)cap.data() & 0xffffU);
 	}
 

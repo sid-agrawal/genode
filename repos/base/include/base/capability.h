@@ -18,6 +18,7 @@
 
 #include <util/string.h>
 #include <base/rpc.h>
+#include <base/log.h>
 #include <base/native_capability.h>
 
 namespace Genode {
@@ -151,7 +152,10 @@ class Genode::Capability : public Untyped_capability
 		template <typename FROM_RPC_INTERFACE>
 		Capability(Capability<FROM_RPC_INTERFACE> const &cap)
 		: Untyped_capability(_check_compatibility(cap))
-		{ }
+		{
+
+			//Genode::log("cap constructor");
+		}
 
 		/**
 		 * Default constructor creates invalid capability

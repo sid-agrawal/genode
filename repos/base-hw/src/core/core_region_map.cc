@@ -29,6 +29,7 @@ Core_region_map::attach(Dataspace_capability ds_cap, size_t size,
                         off_t offset, bool use_local_addr,
                         Region_map::Local_addr, bool, bool writeable)
 {
+	/*The apply here will find it in the tree*/
 	return _ep.apply(ds_cap, [&] (Dataspace_component *ds_ptr) -> Local_addr {
 
 		if (!ds_ptr)

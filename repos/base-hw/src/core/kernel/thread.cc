@@ -104,6 +104,7 @@ void Thread::ipc_copy_msg(Thread &sender)
 	*_utcb = *sender._utcb;
 	_utcb->destination(sender._ipc_capid);
 
+
 	/* translate capabilities */
 	for (unsigned i = 0; i < _ipc_rcv_caps; i++) {
 
@@ -115,6 +116,7 @@ void Thread::ipc_copy_msg(Thread &sender)
 		/* lookup the capability id within the caller's cap space */
 		Reference *oir = (id == cap_id_invalid())
 			? nullptr : sender.pd().cap_tree().find(id);
+
 
 		/* if the caller's capability is invalid, continue */
 		if (!oir) {

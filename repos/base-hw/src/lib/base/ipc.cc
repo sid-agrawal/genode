@@ -15,6 +15,7 @@
 /* Genode includes */
 #include <base/env.h>
 #include <base/ipc.h>
+#include <base/log.h>
 #include <base/allocator.h>
 #include <base/thread.h>
 #include <util/construct_at.h>
@@ -89,20 +90,20 @@ static inline void copy_utcb_to_msg(Native_utcb const &utcb, Msgbuf_base &rcv_ms
 /****************
  ** IPC client **
  ****************/
-
+/*siagraw: This is called on the hello_client*/
 Rpc_exception_code Genode::ipc_call(Native_capability dst,
                                     Msgbuf_base &snd_msg, Msgbuf_base &rcv_msg,
                                     size_t rcv_caps)
 {
 	Native_utcb &utcb = *Thread::myself()->utcb();
 
+		//raw("Sending message to", Capability_space::capid(dst));
 	/*
 	 * Issue IPC call, upgrade the PD's capability slab on demand.
 	 */
 	for (bool done = false; !done; ) {
 
 		copy_msg_to_utcb(snd_msg, *Thread::myself()->utcb());
-
 		switch (Kernel::send_request_msg(Capability_space::capid(dst),
 		                                 (unsigned)rcv_caps)) {
 

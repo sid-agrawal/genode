@@ -108,6 +108,7 @@ class Kernel::Pd
 		Genode::Platform_pd &platform_pd()         { return _platform_pd; }
 		Hw::Page_table      &translation_table()   { return _table;       }
 		Capid_allocator     &capid_alloc()         { return _capid_alloc; }
+		/*This is the cspace*/
 		Object_identity_reference_tree &cap_tree() { return _cap_tree;    }
 };
 

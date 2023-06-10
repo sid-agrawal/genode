@@ -11,6 +11,8 @@
  * under the terms of the GNU Affero General Public License version 3.
  */
 
+/* (siagraw): MPK stuff will do here*/
+
 #ifndef _SRC__LIB__HW__SPEC__X86_64__PAGE_TABLE_H_
 #define _SRC__LIB__HW__SPEC__X86_64__PAGE_TABLE_H_
 
@@ -21,6 +23,7 @@
 #include <hw/util.h>
 #include <util/misc_math.h>
 #include <util/register.h>
+#include <base/log.h>
 
 namespace Hw {
 
@@ -330,10 +333,14 @@ class Hw::Page_directory
 
 			static typename Base::access_t create(addr_t const pa)
 			{
+				Genode::log("fooo");
 				/* XXX: Set memory type depending on active PAT */
 				static Page_flags flags { RW, EXEC, USER, NO_GLOBAL,
 				                          RAM, Genode::CACHED };
-				return Base::create(flags) | Pa::masked(pa);
+				typename Base::access_t t =  Base::create(flags) | Pa::masked(pa);
+
+				Genode::log("%x", t);
+				return t;
 			}
 		};
 

@@ -25,17 +25,38 @@
                 "system_error": "cpp",
                 "thread": "cpp",
                 "tuple": "cpp",
-                "*.inc": "cpp"
+                "*.inc": "cpp",
+                "*.def": "cpp",
+                "array": "cpp",
+                "forward_list": "cpp",
+                "any": "cpp",
+                "executor": "cpp",
+                "internet": "cpp",
+                "io_context": "cpp",
+                "socket": "cpp",
+                "timer": "cpp",
+                "memory": "cpp",
+                "rope": "cpp",
+                "slist": "cpp",
+                "coroutine": "cpp",
+                "future": "cpp",
+                "scoped_allocator": "cpp",
+                "valarray": "cpp",
+                "regex": "cpp"
         },
         "files.exclude": {
                 "repos/base-okl4/**": true,
+                "repos/base-sel4/**": true,
                 "repos/base-fiasco/**": true,
                 "repos/base-nova/**": true,
                 "repos/base-pistachio/**": true,
                 "repos/base-foc/**": true,
-                "repos/base-linux/**": true
+                "repos/base-linux/**": true,
+                "contrib/**": true,
+                "depot/**": true
         },
         "files.watcherExclude": {
                 "contrib/**": true
-        }
+        },
+        "git.ignoreLimitWarning": true
 }
