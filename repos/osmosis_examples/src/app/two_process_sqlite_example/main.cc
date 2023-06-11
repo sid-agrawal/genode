@@ -18,6 +18,10 @@
 #include "./sqlite3.h"
 
 
+/* Genode includes */
+#include <libc/component.h>
+
+#include <stdlib.h> /* 'exit'   */
 
 
 static int callback(__attribute__((unused))void *NotUsed,
@@ -30,7 +34,7 @@ static int callback(__attribute__((unused))void *NotUsed,
         return 0;
 }
 
-int main(int, char **, char **, LibC::Env &env) {
+int main(int, char **, char **) {
         sqlite3 *db;
         char *zErrMsg = 0;
         int rc;
@@ -95,34 +99,4 @@ int main(int, char **, char **, LibC::Env &env) {
         return 0;
 }
 
-/* Genode includes */
-#include <libc/component.h>
 
-/* libc includes */
-#include <libc/args.h>
-#include <stdlib.h> /* 'exit'   */
-
-/* initial environment for the FreeBSD libc implementation */
-extern char **environ;
-
-/* provided by the application */
-// extern "C" int main(int argc, char **argv, char **envp);
-
-static void construct_component(Libc::Env &env)
-{
-	int argc    = 0;
-	char **argv = nullptr;
-	char **envp = nullptr;
-
-	populate_args_and_env(env, argc, argv, envp);
-
-	environ = envp;
-
-	exit(main(argc, argv, envp, env));
-}
-
-
-void Libc::Component::construct(Libc::Env &env)
-{
-	Libc::with_libc([&] () { construct_component(env); });
-}

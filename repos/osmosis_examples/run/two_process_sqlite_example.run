@@ -22,8 +22,9 @@ install_config {
 		<resource name="RAM" quantum="2M"/>
 	</start>
 
-		<start name="sqlite_example">
+		<start name="two_process_sqlite_example">
 			<resource name="RAM" quantum="2M"/>
+			<provides> <service name="Hello"/> </provides>
 			<config>
 				<vfs>
 					<dir name="my_notes"> <ram/> </dir>
@@ -38,10 +39,10 @@ install_config {
 
 append qemu_args " -nographic "
 
-build { core init app/sqlite_example app/sqlite_client}
+build { core init app/two_process_sqlite_example app/sqlite_client}
 
 build_boot_image {
-	core ld.lib.so init sqlite_example libc.lib.so libm.lib.so vfs.lib.so sqlite_client
+	core ld.lib.so init two_process_sqlite_example libc.lib.so libm.lib.so vfs.lib.so sqlite_client
 	posix.lib.so }
 
 run_genode_until "exited with exit value 0.*\n" 30

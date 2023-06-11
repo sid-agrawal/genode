@@ -15,13 +15,19 @@
 
 #include <base/component.h>
 #include <base/log.h>
+#include <hello_session/connection.h>
 
 
 void Component::construct(Genode::Env &env)
 {
 
-        void * ptr = &env;
-	Genode::log("added 2 + 5 = ", ptr);
+	Genode::log("Client started");
+	Hello::Connection hello(env);
+
+	hello.say_hello();
+
+	int const sum = hello.add(2, 5);
+	Genode::log("added 2 + 5 = ", sum);
 
 	Genode::log("hello test completed");
 }

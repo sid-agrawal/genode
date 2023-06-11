@@ -1,6 +1,6 @@
-TARGET   = sqlite_example
+TARGET   = two_process_sqlite_example
 SRC_CC   = main.cc sqlite3.c
-LIBS     = libc base
+LIBS     = posix
 
 CC_OPT   += -D__GENODE__
 CC_OPT   += -DSQLITE_THREADSAFE=0
