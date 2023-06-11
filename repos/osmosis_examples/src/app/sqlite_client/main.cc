@@ -23,9 +23,11 @@ void Component::construct(Genode::Env &env)
 
 	Genode::log("Client started");
 	Hello::Connection hello(env);
+	Genode::log("2-Client started");
 
 	hello.say_hello();
 
+	Genode::log("3-Client started");
 	int const sum = hello.add(2, 5);
 	Genode::log("added 2 + 5 = ", sum);
 
