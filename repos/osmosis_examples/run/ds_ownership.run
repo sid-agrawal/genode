@@ -1,0 +1,35 @@
+create_boot_directory
+
+install_config {
+	<config verbose="yes">
+		<parent-provides>
+			<service name="ROM"/>
+			<service name="PD"/>
+			<service name="RM"/>
+			<service name="CPU"/>
+			<service name="LOG"/>
+		</parent-provides>
+		<start name="ds_ownership" caps="100">
+			<resource name="RAM" quantum="10M"/>
+			<route><any-service><parent/></any-service></route>
+			<config verbose="yes">
+				<parent-provides>
+					<service name="ROM"/>
+					<service name="PD"/>
+					<service name="RM"/>
+					<service name="CPU"/>
+					<service name="LOG"/>
+				</parent-provides>
+			</config>
+		</start>
+	</config>
+}
+
+append qemu_args " -nographic "
+
+build { core init app/ds_ownership }
+
+build_boot_image {
+	core ld.lib.so init ds_ownership}
+
+run_genode_until "exited with exit value 0.*\n" 30
