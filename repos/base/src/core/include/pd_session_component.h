@@ -181,6 +181,13 @@ class Core::Pd_session_component : public Session_object<Pd_session>
 			return _pd->bind_thread(thread);
 		}
 
+/* (siagraw)
+		Platform_thread main_thread()
+		{
+			//(siagraw)
+			//return _pd --> Platform_pd --> Platform_thread
+		}
+*/
 		Region_map_component &address_space_region_map()
 		{
 			return _address_space;

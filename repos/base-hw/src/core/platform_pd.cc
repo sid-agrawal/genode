@@ -163,7 +163,12 @@ bool Platform_pd::bind_thread(Platform_thread &t)
 	t.join_pd(this, main_thread, Address_space::weak_ptr());
 	return true;
 }
-
+/* (siagraw)
+Platform_thread Platform_pd::main_thread()
+{
+	return _main_thread;
+}
+*/
 
 void Platform_pd::assign_parent(Native_capability parent)
 {

@@ -400,5 +400,6 @@ void Config_model::apply_children_restart(Xml_node const &xml)
 void Config_model::trigger_start_children()
 {
 	_model.for_each([&] (Node &node) {
+		Genode::log(__FUNCTION__, "Starting child: ");
 		node.trigger_start_child(); });
 }

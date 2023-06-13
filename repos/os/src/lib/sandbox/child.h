@@ -576,6 +576,17 @@ class Sandbox::Child : Child_policy, Routed_service::Wakeup
 		{
 			if (_state == State::INITIAL) {
 				_child.initiate_env_pd_session();
+				Pd_session_capability child_pdsc = _child.pd_session_cap();
+
+				Pd_session_client pds_client( child_pdsc);
+			//Genode::Parent pc(_child.parent_cap());
+
+
+
+				Genode::log("Child PD SESSION CAP: ", child_pdsc, "Parent CAP: ", _child.parent_cap());
+				Genode::log("VM Cap: ", _child.pd().address_space(), pds_client.address_space());
+				Genode::log("Stack cap: ", _child.pd().stack_area());
+
 				_state = State::RAM_INITIALIZED;
 			}
 
@@ -595,6 +606,8 @@ class Sandbox::Child : Child_policy, Routed_service::Wakeup
 				else
 					_uncertain_dependencies = true;
 			}
+
+
 		}
 
 		/*

@@ -224,6 +224,7 @@ struct Sandbox::Start_model : Noncopyable
 
 	void trigger_start_child()
 	{
+		Genode::log("Starting child: ", _child_ptr->name());
 		if (_child_ptr)
 			_child_ptr->try_start();
 	}
