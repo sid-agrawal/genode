@@ -163,6 +163,11 @@ bool Platform_pd::bind_thread(Platform_thread &t)
 	t.join_pd(this, main_thread, Address_space::weak_ptr());
 	return true;
 }
+
+void Platform_pd::model_state()
+{
+	Genode::log("Platform_pd::model_state()");
+}
 /* (siagraw)
 Platform_thread Platform_pd::main_thread()
 {

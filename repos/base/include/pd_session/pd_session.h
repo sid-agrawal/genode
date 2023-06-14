@@ -343,6 +343,15 @@ struct Genode::Pd_session : Session, Ram_allocator
 	 */
 	virtual Attach_dma_result attach_dma(Dataspace_capability, addr_t at) = 0;
 
+	/*******************************************
+	 ** Support OSmosis-specific interfaces  **
+	 *******************************************/
+
+	/**
+	 * Print the current model state of the PD as per
+	 * OSmosis' model specifications.
+	*/
+	virtual void model_state() = 0;
 
 	/*********************
 	 ** RPC declaration **
@@ -397,6 +406,7 @@ struct Genode::Pd_session : Session, Ram_allocator
 	GENODE_RPC(Rpc_attach_dma, Attach_dma_result, attach_dma,
 	           Dataspace_capability, addr_t);
 
+	GENODE_RPC(Rpc_model_state, void, model_state);
 	GENODE_RPC_INTERFACE(Rpc_assign_parent, Rpc_assign_pci, Rpc_map,
 	                     Rpc_alloc_signal_source, Rpc_free_signal_source,
 	                     Rpc_alloc_context, Rpc_free_context, Rpc_submit,
@@ -406,7 +416,7 @@ struct Genode::Pd_session : Session, Ram_allocator
 	                     Rpc_try_alloc, Rpc_free,
 	                     Rpc_transfer_ram_quota, Rpc_ram_quota, Rpc_used_ram,
 	                     Rpc_native_pd, Rpc_managing_system,
-	                     Rpc_dma_addr, Rpc_attach_dma);
+	                     Rpc_dma_addr, Rpc_attach_dma, Rpc_model_state);
 };
 
 #endif /* _INCLUDE__PD_SESSION__PD_SESSION_H_ */

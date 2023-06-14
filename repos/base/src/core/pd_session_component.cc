@@ -197,3 +197,10 @@ Pd_session_component::attach_dma(Dataspace_capability ds_cap, addr_t at)
 
 	return _address_space.attach_dma(ds_cap, at);
 }
+
+void
+Pd_session_component::model_state()
+{
+	Genode::log("Inside: ", __func__);
+	_pd->model_state();
+}

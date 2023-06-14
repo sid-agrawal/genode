@@ -16,6 +16,7 @@
 #include <base/component.h>
 #include <base/log.h>
 #include <hello_session/connection.h>
+#include <pd_session/connection.h>
 
 
 void Component::construct(Genode::Env &env)
@@ -32,4 +33,7 @@ void Component::construct(Genode::Env &env)
 	Genode::log("added 2 + 5 = ", sum);
 
 	Genode::log("hello test completed");
+
+	Genode::Pd_connection pd(env);
+	pd.model_state();
 }

@@ -350,6 +350,11 @@ class Core::Pd_session_component : public Session_object<Pd_session>
 		addr_t dma_addr(Ram_dataspace_capability) override;
 
 		Attach_dma_result attach_dma(Dataspace_capability, addr_t) override;
+
+		/*******************************************
+		 ** Support for OSmosis specific features **
+		 *******************************************/
+		void model_state() override;
 };
 
 #endif /* _CORE__INCLUDE__PD_SESSION_COMPONENT_H_ */

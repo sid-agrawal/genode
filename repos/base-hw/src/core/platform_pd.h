@@ -219,6 +219,11 @@ class Core::Platform_pd : public Hw::Address_space, private Cap_space
 		 */
 		void assign_parent(Native_capability parent);
 
+		/**
+		 * Dump OSmosis model state
+		 */
+		void model_state();
+
 
 		/***************
 		 ** Accessors **

@@ -100,6 +100,9 @@ struct Genode::Pd_session_client : Rpc_client<Pd_session>
 
 	Attach_dma_result attach_dma(Dataspace_capability ds, addr_t at) override {
 		return call<Rpc_attach_dma>(ds, at); }
+
+	void model_state() override {
+		call<Rpc_model_state>(); }
 };
 
 #endif /* _INCLUDE__PD_SESSION__CLIENT_H_ */

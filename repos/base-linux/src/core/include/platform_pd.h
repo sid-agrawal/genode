@@ -34,7 +34,9 @@ struct Core::Platform_pd
 
 	bool bind_thread(Platform_thread &) { return true; }
 
-	void assign_parent(Capability<Parent>) { }
+	void assign_parent(Capability<Parent>) {}
+
+	void model_state(){};
 };
 
 #endif /* _CORE__INCLUDE__PLATFORM_PD_H_ */
