@@ -1,6 +1,19 @@
 {
     "files.associations": {
         "tuple": "cpp",
-        "*.inc": "cpp"
-    }
+        "*.inc": "cpp",
+        "*.def": "cpp",
+        "*.tcc": "cpp",
+        "compare": "cpp",
+        "bitset": "cpp",
+        "fstream": "cpp",
+        "functional": "cpp",
+        "future": "cpp",
+        "istream": "cpp",
+        "ranges": "cpp",
+        "type_traits": "cpp",
+        "variant": "cpp",
+        "regex": "cpp"
+    },
+    "git.ignoreLimitWarning": true
 }

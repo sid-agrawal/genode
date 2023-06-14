@@ -572,6 +572,12 @@ class Sandbox::Child : Child_policy, Routed_service::Wakeup
 		Cap_quota cap_quota() const { return _resources.assigned_cap_quota; }
 		Cpu_quota cpu_quota() const { return _effective_cpu_quota; }
 
+
+template <class T> void printType(const T&)
+{
+    Genode::log(__FUNCTION__, __PRETTY_FUNCTION__);
+}
+
 		void try_start()
 		{
 			if (_state == State::INITIAL) {
@@ -583,7 +589,10 @@ class Sandbox::Child : Child_policy, Routed_service::Wakeup
 
 
 
-				Genode::log("Child PD SESSION CAP: ", child_pdsc, "Parent CAP: ", _child.parent_cap());
+				Genode::log("Child PD SESSION CAP: ", child_pdsc);
+				Genode::log("Parent CAP: ", _child.parent_cap());
+				printType(_child.parent_cap());
+
 				Genode::log("VM Cap: ", _child.pd().address_space(), pds_client.address_space());
 				Genode::log("Stack cap: ", _child.pd().stack_area());
 
