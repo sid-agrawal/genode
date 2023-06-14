@@ -1,9 +1,7 @@
 TARGET   = two_process_sqlite_example
-SRC_CC   = main.cc sqlite3.c
-LIBS     = libc base sid-foo
+SRC_CC   = main.cc
+LIBS     = libc base sqlite3
 
-CC_OPT   += -D__GENODE__
-CC_OPT   += -DSQLITE_THREADSAFE=0
 # CC_OPT   += -DSQLITE_OMIT_LOAD_EXTENSION -DSQLITE_OMIT_WAL
 # CC_OPT   += -DSQLITE_OMIT_RANDOMNESS
 
