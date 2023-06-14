@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include <sid-foo/sqlite3.h>
+#include <sqlite3/sqlite3.h>
 
 #include <root/component.h>
 #include <hello_session/hello_session.h>
@@ -124,8 +124,8 @@ struct Hello::Main
 
 	Main(Libc::Env &env) : env(env)
 	{
+	 //	Libc::with_libc([] () { do_sql(); });
 		env.parent().announce(env.ep().manage(root));
-	//	Libc::with_libc([] () { do_sql(); });
 	}
 };
 
@@ -142,7 +142,6 @@ static int callback(__attribute__((unused))void *NotUsed,
 }
 #endif
 
-__attribute__((unused))
 static int do_sql()
 {
         Genode::log("-----");
@@ -163,8 +162,11 @@ static int do_sql()
         char *zErrMsg = 0;
         /* Create Table */
         static char const *cmd1 = "CREATE TABLE KVStore (key int, val int)";
+                Genode::log("Before exec");
         rc = sqlite3_exec(db, cmd1, callback, 0, &zErrMsg);
+                Genode::log("After exec");
         if( rc!=SQLITE_OK ){
+                Genode::log("sqlite3_exec failed: ", rc);
                 printf("SQL error: %s\n", zErrMsg);
                 sqlite3_free(zErrMsg);
                 return 1;
@@ -223,10 +225,9 @@ static int do_sql()
                 printf("SQL error: %s\n", zErrMsg);
                 sqlite3_free(zErrMsg);
         }
-#endif
-        Genode::log("Finishing test");
-
         sqlite3_close(db);
+
+#endif
         return 0;
 }
 
