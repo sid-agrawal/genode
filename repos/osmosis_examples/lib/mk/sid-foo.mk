@@ -1,8 +1,8 @@
 SRC_CC  += sid-foo.c
 INC_DIR += $(REP_DIR)/src/lib/sid-foo
 
-LIBS = posix
+LIBS = libc
 
 vpath %.cc $(REP_DIR)/src/lib/sid-foo
 
-SHARED_LIB = yes
+SHARED_LIB = no

@@ -1,6 +1,6 @@
 TARGET   = sqlite_example
 SRC_CC   = main.cc sqlite3.c
-LIBS     = posix sid-foo
+LIBS     = posix
 
 CC_OPT   += -D__GENODE__
 CC_OPT   += -DSQLITE_THREADSAFE=0

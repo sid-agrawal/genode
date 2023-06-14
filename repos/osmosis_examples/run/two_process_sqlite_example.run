@@ -42,7 +42,7 @@ append qemu_args " -nographic "
 build { core init app/two_process_sqlite_example app/sqlite_client}
 
 build_boot_image {
-	core ld.lib.so init two_process_sqlite_example libc.lib.so libm.lib.so vfs.lib.so sqlite_client
+	core ld.lib.so init two_process_sqlite_example libc.lib.so libm.lib.so vfs.lib.so sqlite_client sid-foo.lib.so
 	posix.lib.so }
 
 run_genode_until "exited with exit value 0.*\n" 30

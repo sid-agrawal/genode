@@ -48,6 +48,7 @@ static int do_sql();
 #include <root/component.h>
 #include <hello_session/hello_session.h>
 #include <base/rpc_server.h>
+#include <sid-foo/sid-foo.h>
 
 namespace Hello {
 	struct Session_component;
@@ -124,6 +125,7 @@ struct Hello::Main
 
 	Main(Libc::Env &env) : env(env)
 	{
+                Genode::log("I am calling sid-foo: ", sid_foo_call());
 		env.parent().announce(env.ep().manage(root));
 	//	Libc::with_libc([] () { do_sql(); });
 	}
