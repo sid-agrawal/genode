@@ -87,3 +87,4 @@ Core_region_map::attach(Dataspace_capability ds_cap, size_t size,
 
 
 void Core_region_map::detach(Local_addr) { }
+void Core_region_map::list() { }

@@ -15,9 +15,12 @@
 #include <base/component.h>
 #include <base/log.h>
 #include <base/heap.h>
+#include <base/child.h>
 #include <root/component.h>
 #include <hello_session/hello_session.h>
 #include <base/rpc_server.h>
+#include <base/attached_ram_dataspace.h>
+#include <base/attached_rom_dataspace.h>
 
 namespace Hello {
 	struct Session_component;
@@ -79,6 +82,27 @@ struct Hello::Main
 		 * announce the service to our parent.
 		 */
 		env.parent().announce(env.ep().manage(root));
+
+		Genode::Pd_connection pd(env);
+		pd.model_state();
+
+		Genode::Region_map_client _address_space{pd.address_space()};
+		Genode::Region_map_client _stack_area{pd.stack_area()};
+		Genode::Region_map_client _linker_area{pd.linker_area()};
+		/* dataspace used for creating shared memory between parent and child */
+		Genode::Attached_ram_dataspace _ds{env.ram(), env.rm(), 4096};
+		_address_space.attach(_ds.cap());
+
+		Genode::log("In the Server");
+		Genode::log("Address Space");
+		_address_space.list();
+		// Genode::log("Stack area");
+		// _stack_area.list();
+		// Genode::log("LInker area");
+		// _linker_area.list();
+
+		// Genode::log("here is the model state");
+		// pd.model_state();
 	}
 };
 

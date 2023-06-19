@@ -41,6 +41,7 @@ class Core::Core_region_map : public Region_map
 		                  bool writeable = true) override;
 
 		void detach(Local_addr) override;
+		void list() override;
 
 		void  fault_handler (Signal_context_capability) override { }
 		State state         ()                          override { return State(); }

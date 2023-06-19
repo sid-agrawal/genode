@@ -48,6 +48,7 @@ class Genode::Region_map_client : public Rpc_client<Region_map>
 		                  bool writeable = true) override;
 
 		void                 detach(Local_addr)                       override;
+		void 				 list() 								  override;
 		void                 fault_handler(Signal_context_capability) override;
 		State                state()                                  override;
 		Dataspace_capability dataspace()                              override;

@@ -702,6 +702,7 @@ void Genode::init_ldso_phdr(Env &env)
 		}
 
 		void detach(Local_addr) override { throw Not_implemented(); }
+		void list() override { throw Not_implemented(); }
 
 		void fault_handler(Signal_context_capability) override { }
 

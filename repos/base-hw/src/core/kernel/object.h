@@ -178,7 +178,7 @@ class Kernel::Object_identity_reference
 		Object_identity_reference * factory(void * dst, Pd &pd);
 
 		Pd &    pd()     { return _pd;    }
-		capid_t capid()  { return _capid; }
+		capid_t capid() const  { return _capid; }
 
 		void add_to_utcb()      { _in_utcbs++; }
 		void remove_from_utcb() { _in_utcbs--; }

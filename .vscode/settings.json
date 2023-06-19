@@ -35,5 +35,6 @@
         "repos/base-foc/**": true,
         "repos/base-linux/**": true,
         "repos/base-sel4/**": true
+        "depot/**": true
     }
 }

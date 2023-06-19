@@ -33,6 +33,7 @@ Region_map_client::attach(Dataspace_capability ds, size_t size, off_t offset,
 void Region_map_client::detach(Local_addr local_addr) {
 	call<Rpc_detach>(local_addr); }
 
+void Region_map_client::list(){call<Rpc_list>(); }
 
 void Region_map_client::fault_handler(Signal_context_capability cap) {
 	call<Rpc_fault_handler>(cap); }

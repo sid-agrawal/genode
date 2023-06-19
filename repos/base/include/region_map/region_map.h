@@ -139,6 +139,11 @@ struct Genode::Region_map : Interface
 	virtual void detach(Local_addr local_addr) = 0;
 
 	/**
+	 * list all the regions
+	 */
+	virtual void list() = 0;
+
+	/**
 	 * Register signal handler for region-manager faults
 	 *
 	 * On Linux, this signal is never delivered because page-fault handling
@@ -169,11 +174,12 @@ struct Genode::Region_map : Interface
 	                 Dataspace_capability, size_t, off_t, bool, Local_addr,
 	                 bool, bool);
 	GENODE_RPC(Rpc_detach, void, detach, Local_addr);
+	GENODE_RPC(Rpc_list, void, list);
 	GENODE_RPC(Rpc_fault_handler, void, fault_handler, Signal_context_capability);
 	GENODE_RPC(Rpc_state, State, state);
 	GENODE_RPC(Rpc_dataspace, Dataspace_capability, dataspace);
 
-	GENODE_RPC_INTERFACE(Rpc_attach, Rpc_detach, Rpc_fault_handler, Rpc_state,
+	GENODE_RPC_INTERFACE(Rpc_attach, Rpc_detach, Rpc_fault_handler, Rpc_state, Rpc_list,
 	                     Rpc_dataspace);
 };
 

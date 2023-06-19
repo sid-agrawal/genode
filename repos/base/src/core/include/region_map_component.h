@@ -104,6 +104,16 @@ class Core::Rm_region : public List<Rm_region>::Element
 		bool                       dma() const { return _attr.dma;   }
 		Dataspace_component &dataspace() const { return _dsc; }
 		Region_map_detach          &rm() const { return _rm;  }
+
+		void print(Genode::Output &out) const{
+			Genode::print(out,
+			"range=", Hex_range(base(), size()),
+			" size= ", size(),
+			" write=", write(),
+			" exec=", executable(),
+			" off=", offset(),
+			" dma=", dma());
+		}
 };
 
 
@@ -468,6 +478,7 @@ class Core::Region_map_component : private Weak_object<Region_map_component>,
 		using Attach_dma_result = Pd_session::Attach_dma_result;
 
 		Attach_dma_result attach_dma(Dataspace_capability, addr_t);
+		void list() override;
 
 
 		/**************************

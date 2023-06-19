@@ -118,6 +118,7 @@ class Stack_area_region_map : public Region_map
 			unmap_local(detach, pages);
 		}
 
+		void list() override { }
 		void fault_handler(Signal_context_capability) override { }
 
 		State state() override { return State(); }

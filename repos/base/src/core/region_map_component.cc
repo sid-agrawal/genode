@@ -477,7 +477,12 @@ Region_map_component::_attach(Dataspace_capability ds_cap, Attach_attr const att
 		return attach_at;
 	};
 
-	return _ds_ep.apply(ds_cap, lambda);
+	Region_map::Local_addr laddr = _ds_ep.apply(ds_cap, lambda);
+
+	//(siagraw)
+	list();
+
+	return laddr;
 }
 
 
@@ -575,6 +580,16 @@ Region_map_component::attach_dma(Dataspace_capability ds_cap, addr_t at)
 	catch (Region_conflict)   { return Attach_dma_error::DENIED; }
 	catch (Out_of_ram)        { return Attach_dma_error::OUT_OF_RAM; }
 	catch (Out_of_caps)       { return Attach_dma_error::OUT_OF_CAPS; }
+}
+
+void Region_map_component::list(){
+
+	Genode::log("Region map list: ");
+	Genode::log(_map);
+
+		_map.for_each_metadata([] (Rm_region const &r) {
+			Genode::log("Region: ", r);
+		});
 }
 
 

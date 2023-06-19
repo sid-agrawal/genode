@@ -121,6 +121,14 @@ class Core::Rpc_cap_factory
 				}
 			}
 		}
+
+		void print(Genode::Output &out) const
+		{
+			for (Kobject const * obj = _list.first(); obj; obj = obj->next()) {
+				Genode::print(out, " ", obj->cap.data());
+			}
+		}
+
 };
 
 #endif /* _CORE__RPC_CAP_FACTORY_H_ */

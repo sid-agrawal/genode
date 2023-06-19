@@ -405,6 +405,37 @@ class Genode::Allocator_avl_tpl : public Allocator_avl_base
 			return b && b->used() ? b : 0;
 		}
 
+		void print(Genode::Output &out) const
+		{
+			_block_tree().for_each([&](Genode::Allocator_avl_base::Block const &b)
+								   {
+									   Genode::print(out, "AVL Block: ",
+													 " range=", Hex_range(b.addr(), b.size()),
+													 " size=", Number_of_bytes(b.size()), " "
+																						  " avail=",
+													 Number_of_bytes(b.avail()), " "
+																				 " used=",
+													 b.used(),
+													 " max_avail=", Number_of_bytes(b.max_avail()), "\n");
+								   });
+		}
+
+		template <typename FUNC>
+		void for_each_metadata(FUNC &&fn) const
+		{
+			_block_tree().for_each([&](Genode::Allocator_avl_base::Block const &b)
+								   {
+									   if (b.used())
+									   {
+										   BMDT *md = metadata((void *)b.addr());
+										   Genode::log("\tfor_each_metadata: b", b.addr(), "md:", md);
+										   fn((BMDT &)*md);
+										   return;
+									   }
+									   Genode::log("\tFound unused block");
+								   });
+		}
+
 		Range_result add_range(addr_t base, size_t size) override
 		{
 			/*

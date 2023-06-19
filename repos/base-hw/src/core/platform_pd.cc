@@ -164,9 +164,32 @@ bool Platform_pd::bind_thread(Platform_thread &t)
 	return true;
 }
 
+// siagraw
 void Platform_pd::model_state()
 {
-	Genode::log("Platform_pd::model_state()");
+	// Kernel::Object_identity_reference_tree _cap_tree = this->kernel_pd().cap_tree();
+	// while (Kernel::Object_identity_reference *oir = _cap_tree.first()) {
+	// 	Genode::log("cap_tree: ", oir->object(), oir->pd(), oir->capid());
+	// }
+
+	Kernel::Pd *pd = &this->kernel_pd();
+	Genode::log("kpd: ", pd);
+
+	Kernel::Object_identity_reference_tree &cap_tree = pd->cap_tree();
+	Genode::log("cap_tree: ", &cap_tree);
+
+	pd->cap_tree().for_each([&] (Kernel::Object_identity_reference const &oir) {
+		Genode::log("cap_tree: ",  (long)oir.capid());
+	});
+
+	// const Kernel::Object_identity_reference *oir = cap_tree.first();
+	//Genode::log("oid: ", oir);
+	// while (oir) {
+	// 	Genode::log("cap_tree: ", oir->capid());
+	// 	oir = oir->next();
+	// }
+	Genode::log("inside Platform_pd model_state");
+
 }
 /* (siagraw)
 Platform_thread Platform_pd::main_thread()
