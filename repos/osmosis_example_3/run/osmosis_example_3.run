@@ -2,7 +2,7 @@
 # Build
 #
 
-build { core init hello }
+build { core init osm_hello }
 
 create_boot_directory
 

@@ -81,11 +81,20 @@ struct Hello::Main
 		 * Create a RPC object capability for the root interface and
 		 * announce the service to our parent.
 		 */
+		Genode::error(">>>>>>>>creating RPC object");
 		env.parent().announce(env.ep().manage(root));
+		Genode::error("<<<<<<<<creating RPC object");
+
+		Genode::Attached_ram_dataspace _ds{env.ram(), env.rm(), 4096};
+
+		Genode::error(">>>>>>>>Obtaining local_cap_space");
+		// Genode::Capability_space::capid(_ds);
+		Genode::error("<<<<<<<<Returning form local_cap_space");
 
 		Genode::Pd_connection pd(env);
 		pd.model_state();
 
+#if 0
 		Genode::Region_map_client _address_space{pd.address_space()};
 		Genode::Region_map_client _stack_area{pd.stack_area()};
 		Genode::Region_map_client _linker_area{pd.linker_area()};
@@ -103,6 +112,7 @@ struct Hello::Main
 
 		// Genode::log("here is the model state");
 		// pd.model_state();
+#endif
 	}
 };
 
