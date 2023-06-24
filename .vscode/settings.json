@@ -26,7 +26,7 @@
         "thread": "cpp",
         "tuple": "cpp"
     },
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
     "files.exclude": {
         "repos/base-okl4/**": true,
         "repos/base-fiasco/**": true,
@@ -34,7 +34,9 @@
         "repos/base-pistachio/**": true,
         "repos/base-foc/**": true,
         "repos/base-linux/**": true,
-        "repos/base-sel4/**": true
+        "repos/base-sel4/**": true,
         "depot/**": true
-    }
+    },
+    "C_Cpp.default.compileCommands": "build/x86_64/compile_commands.json",
+    "C_Cpp.codeAnalysis.clangTidy.useBuildPath": true
 }
