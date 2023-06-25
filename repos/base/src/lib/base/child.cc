@@ -748,12 +748,20 @@ namespace {
 		:
 			_rm_client(pd.address_space()),
 			_rm(policy.address_space(pd) ? *policy.address_space(pd) : _rm_client)
-		{ }
+		{
+			Genode::log("For child: ", policy.name(),
+			"and policy.address_space()", policy.address_space(pd));
+		}
 
 		Region_map &region_map() { return _rm; }
 	};
 }
 
+void Child::rm_list()
+{
+	Genode::log("\t\tChild::rm_list()", _policy.name());
+	Child_address_space(_pd.session(), _policy).region_map().list();
+}
 
 void Child::_try_construct_env_dependent_members()
 {
@@ -792,6 +800,11 @@ void Child::_try_construct_env_dependent_members()
 		                   *_initial_thread, _local_rm,
 		                   Child_address_space(_pd.session(), _policy).region_map(),
 		                   cap());
+
+		// siagraw
+		Genode::log("\t\tcreated process ", __FUNCTION__, " with name ", _policy.name());
+		Child_address_space(_pd.session(), _policy).region_map().list();
+		Genode::log("\t\tcreated process ", __FUNCTION__);
 	}
 	catch (Out_of_ram)                          { _error("out of RAM during ELF loading"); }
 	catch (Out_of_caps)                         { _error("out of caps during ELF loading"); }
@@ -954,6 +967,10 @@ Child::Child(Region_map      &local_rm,
 		initiate_env_pd_session();
 		initiate_env_sessions();
 	}
+	// siagraw
+	// Genode::log("\t\tChild constructor ", __FUNCTION__);
+	// Child_address_space(_pd.session(), _policy).region_map().list();
+	// Genode::log("\t\tChild constructor ", __FUNCTION__);
 }
 
 

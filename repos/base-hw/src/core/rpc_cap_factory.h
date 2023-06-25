@@ -17,6 +17,7 @@
 /* Genode includes */
 #include <util/list.h>
 #include <util/construct_at.h>
+#include <util/print_typeinfo.h>
 #include <base/mutex.h>
 #include <base/tslab.h>
 #include <base/capability.h>
@@ -100,12 +101,15 @@ class Core::Rpc_cap_factory
 
 					/* store it in the list and return result */
 					_list.insert(&obj);
+					Genode::log("^^^^^allocating RPC capability ", obj.cap.local_name(), " for _ep: ", ep.local_name());
+					printTypeInfo(obj.cap);
 					return obj.cap;
 				},
 				[&] (Allocator::Alloc_error) -> Native_capability {
 					/* XXX distinguish error conditions */
 					throw Allocator::Out_of_memory();
 				});
+
 		}
 
 		void free(Native_capability cap)
@@ -124,8 +128,9 @@ class Core::Rpc_cap_factory
 
 		void print(Genode::Output &out) const
 		{
+
 			for (Kobject const * obj = _list.first(); obj; obj = obj->next()) {
-				Genode::print(out, " ", obj->cap.data());
+				Genode::print(out, " CAPID:\n", obj->cap.data());
 			}
 		}
 

@@ -299,6 +299,10 @@ class Genode::Parent
 		 */
 		virtual void heartbeat_response() = 0;
 
+		/**
+		 * Dump RM
+		 */
+		virtual void rm_list() = 0;
 
 		/*********************
 		 ** RPC declaration **
@@ -336,6 +340,7 @@ class Genode::Parent
 		GENODE_RPC(Rpc_yield_response, void, yield_response);
 		GENODE_RPC(Rpc_heartbeat_sigh, void, heartbeat_sigh, Signal_context_capability);
 		GENODE_RPC(Rpc_heartbeat_response, void, heartbeat_response);
+		GENODE_RPC(Rpc_rm_list, void, rm_list);
 
 		GENODE_RPC_INTERFACE(Rpc_exit, Rpc_announce, Rpc_session_sigh,
 		                     Rpc_session, Rpc_session_cap, Rpc_upgrade,
@@ -343,7 +348,8 @@ class Genode::Parent
 		                     Rpc_deliver_session_cap, Rpc_resource_avail_sigh,
 		                     Rpc_resource_request, Rpc_yield_sigh,
 		                     Rpc_yield_request, Rpc_yield_response,
-		                     Rpc_heartbeat_sigh, Rpc_heartbeat_response);
+		                     Rpc_heartbeat_sigh, Rpc_heartbeat_response,
+							 Rpc_rm_list);
 };
 
 

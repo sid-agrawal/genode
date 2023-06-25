@@ -71,8 +71,10 @@ static inline void copy_utcb_to_msg(Native_utcb const &utcb, Msgbuf_base &rcv_ms
 
 	for (unsigned i = 0; i < num_caps; i++) {
 		rcv_msg.cap(i) = Capability_space::import(utcb.cap_get(i));
-		if (rcv_msg.cap(i).valid())
+		if (rcv_msg.cap(i).valid()) {
 			Kernel::ack_cap(Capability_space::capid(rcv_msg.cap(i)));
+			Kernel::get_kobj_id(Capability_space::capid(rcv_msg.cap(i)));
+		}
 	}
 
 	rcv_msg.used_caps(num_caps);

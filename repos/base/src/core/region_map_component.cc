@@ -480,7 +480,9 @@ Region_map_component::_attach(Dataspace_capability ds_cap, Attach_attr const att
 	Region_map::Local_addr laddr = _ds_ep.apply(ds_cap, lambda);
 
 	//(siagraw)
-	list();
+	// Genode::log("-------------------> In Attach: START");
+	// list();
+	// Genode::log("-------------------> In Attach: END");
 
 	return laddr;
 }
@@ -513,6 +515,7 @@ addr_t Region_map_component::_core_local_addr(Rm_region & region)
 
 void Region_map_component::unmap_region(addr_t base, size_t size)
 {
+	// Genode::log("Unmapping region: ", (void *)base, " size: ", size);
 	if (address_space()) address_space()->flush(base, size, { 0 });
 
 	/**
@@ -553,7 +556,9 @@ Region_map_component::attach(Dataspace_capability ds_cap, size_t size,
 		.dma            = false,
 	};
 
-	return _attach(ds_cap, attr);
+	Region_map::Local_addr laddr = _attach(ds_cap, attr);
+	// Genode::log("&&&&&&&&&&&&&&&&&   attached at: ", (void *)laddr, " size: ", size);
+	return laddr;
 }
 
 
@@ -584,17 +589,19 @@ Region_map_component::attach_dma(Dataspace_capability ds_cap, addr_t at)
 
 void Region_map_component::list(){
 
-	Genode::log("Region map list: ");
-	Genode::log(_map);
+	Genode::log("Region map list: _map:", &_map);
+	// Genode::log(_map);
 
 		_map.for_each_metadata([] (Rm_region const &r) {
-			Genode::log("Region: ", r);
+			Genode::log("\tRegion: ", r);
 		});
 }
 
 
 void Region_map_component::detach(Local_addr local_addr)
 {
+
+	// Genode::log("&&&&&&&&&&&&&&&&&   Detaching: ", (void *)local_addr);
 	/* serialize access */
 	Mutex::Guard lock_guard(_mutex);
 
@@ -650,6 +657,9 @@ void Region_map_component::detach(Local_addr local_addr)
 		 */
 		unmap_region(region.base(), region.size());
 	}
+	// Genode::log("-------------------> In Detach: START");
+	// list();
+	// Genode::log("-------------------> In Detach: END");
 }
 
 

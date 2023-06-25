@@ -61,6 +61,12 @@ Child::Process::Loaded_executable::Loaded_executable(Type type,
 		if (seg.flags().skip)    continue;
 		if (seg.mem_size() == 0) continue;
 
+		// siagraw
+		// Genode::log("Segment:", n, " size: ", Number_of_bytes(seg.mem_size()), "\t",
+		// 			Hex_range((addr_t)seg.start(), seg.mem_size()),
+		// 			" w: ", seg.flags().w, " x:", seg.flags().x, " r: ", seg.flags().r,
+		// 			" skip: ", seg.flags().skip,
+		// 			" valid: ", seg.valid());
 		/* same values for r/o and r/w segments */
 		addr_t const addr = (addr_t)seg.start();
 		size_t const size = seg.mem_size();
@@ -150,6 +156,10 @@ Child::Process::Loaded_executable::Loaded_executable(Type type,
 		}
 	}
 
+	// siagraw
+	// Genode::log("Listing REMOTE RM: ----------------START----------------");
+	// remote_rm.list();
+	// Genode::log("Listing REMOTE RM: -----------------END-----------------");
 	/* detach ELF */
 	local_rm.detach((void *)elf_addr);
 }

@@ -17,6 +17,10 @@
 #include <hello_session/hello_session.h>
 #include <base/rpc_client.h>
 #include <base/log.h>
+#include <base/log.h>
+#include <util/print_typeinfo.h>
+/* kernel includes */
+#include <kernel/interface.h>
 
 namespace Hello { struct Session_client; }
 
@@ -24,7 +28,10 @@ namespace Hello { struct Session_client; }
 struct Hello::Session_client : Genode::Rpc_client<Session>
 {
 	Session_client(Genode::Capability<Session> cap)
-	: Genode::Rpc_client<Session>(cap) { }
+	: Genode::Rpc_client<Session>(cap) {
+		Genode::log("Hello::Session_client constructed with cap: ", cap.local_name());
+		printTypeInfo(cap);
+	 }
 
 	void say_hello() override
 	{

@@ -11,6 +11,10 @@
  * under the terms of the GNU Affero General Public License version 3.
  */
 
+/*
+THIS IS not used
+
+*/
 /* Genode includes */
 #include <base/capability.h>
 

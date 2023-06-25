@@ -112,7 +112,22 @@ class Core::Rm_region : public List<Rm_region>::Element
 			" write=", write(),
 			" exec=", executable(),
 			" off=", offset(),
-			" dma=", dma());
+			" dma=", dma(),
+			"| DS |",
+			" core_local-addr", _dsc.core_local_addr(),
+			" phys-addr =", _dsc.phys_addr(),
+			" managed =", _dsc.managed(),
+			" this =", this, "\n");
+
+			Rm_region *r = _dsc.regions().first();
+			while (r)
+			{
+				if (r == this)
+					return;
+
+				Genode::print(out, "--\t", *r, "\n");
+				r = r->List<Rm_region>::Element::next();
+			}
 		}
 };
 

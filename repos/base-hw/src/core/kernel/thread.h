@@ -294,6 +294,7 @@ class Kernel::Thread : private Kernel::Object, public Cpu_job, private Timeout
 		void _call_timeout_max_us();
 		void _call_time();
 		void _call_suspend();
+		void _call_get_kobj_id();
 
 		template <typename T, typename... ARGS>
 		void _call_new(ARGS &&... args)

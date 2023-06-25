@@ -17,9 +17,13 @@
 #include <hello_session/connection.h>
 
 
+
+
 void Component::construct(Genode::Env &env)
 {
+	Genode::error(">>>>>>>>Obtaining Local connection");
 	Hello::Connection hello(env);
+	Genode::error("<<<<<<<<Obtaining Local connection");
 
 	hello.say_hello();
 

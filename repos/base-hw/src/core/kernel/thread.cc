@@ -747,6 +747,17 @@ void Thread::_call_new_obj()
 	user_arg_0(coi->core_capid());
 }
 
+void Thread::_call_get_kobj_id()
+{
+	Object_identity_reference * ref = pd().cap_tree().find((Kernel::capid_t)user_arg_1());
+	if (!ref) {
+		user_arg_0(cap_id_invalid());
+		return;
+	}
+	Genode::raw("For: ", user_arg_1(), " found: ");
+	Genode::raw("capid: ", ref->capid(), " object: ", ref->object<Thread>(),
+	" in pd: ", ref->pd().pd_id());
+}
 
 void Thread::_call_delete_obj()
 {
@@ -824,6 +835,7 @@ void Thread::_call()
 	case call_id_time():                     _call_time(); return;
 	case call_id_run_vm():                   _call_run_vm(); return;
 	case call_id_pause_vm():                 _call_pause_vm(); return;
+	case call_id_get_kobj_id():            _call_get_kobj_id(); return;
 	default:
 		/* check wether this is a core thread */
 		if (_type != CORE) {

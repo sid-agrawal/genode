@@ -34,6 +34,12 @@ namespace Genode { namespace Capability_space {
 	{
 		return Native_capability((Native_capability::Data *)(addr_t)capid);
 	}
+
+	__attribute__((unused))
+	static void list()
+	{
+		//print all caps
+	}
 } }
 
 #endif /* _INCLUDE__BASE__INTERNAL__CAPABILITY_SPACE_H_ */

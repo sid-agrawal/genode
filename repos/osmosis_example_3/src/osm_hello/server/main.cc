@@ -81,15 +81,11 @@ struct Hello::Main
 		 * Create a RPC object capability for the root interface and
 		 * announce the service to our parent.
 		 */
-		Genode::error(">>>>>>>>creating RPC object");
 		env.parent().announce(env.ep().manage(root));
-		Genode::error("<<<<<<<<creating RPC object");
 
 		Genode::Attached_ram_dataspace _ds{env.ram(), env.rm(), 4096};
 
-		Genode::error(">>>>>>>>Obtaining local_cap_space");
 		// Genode::Capability_space::capid(_ds);
-		Genode::error("<<<<<<<<Returning form local_cap_space");
 
 		Genode::Pd_connection pd(env);
 		pd.model_state();

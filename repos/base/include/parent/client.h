@@ -74,6 +74,7 @@ struct Genode::Parent_client : Rpc_client<Parent>
 		call<Rpc_heartbeat_sigh>(sigh); }
 
 	void heartbeat_response() override { call<Rpc_heartbeat_response>(); }
+	void rm_list() override { call<Rpc_rm_list>(); }
 };
 
 #endif /* _INCLUDE__PARENT__CLIENT_H_ */

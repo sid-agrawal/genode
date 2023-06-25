@@ -23,7 +23,16 @@
 
 namespace Core { class Rpc_cap_factory; }
 
-
+/*
+THIS IS NOT USED
+THIS IS NOT USED
+THIS IS NOT USED
+THIS IS NOT USED
+THIS IS NOT USED
+THIS IS NOT USED
+THIS IS NOT USED
+THIS IS NOT USED
+*/
 class Core::Rpc_cap_factory
 {
 	private:

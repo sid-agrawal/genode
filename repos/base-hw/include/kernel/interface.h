@@ -47,6 +47,7 @@ namespace Kernel {
 	constexpr Call_arg call_id_run_vm()                   { return 22; }
 	constexpr Call_arg call_id_pause_vm()                 { return 23; }
 	constexpr Call_arg call_id_suspend()                  { return 24; }
+	constexpr Call_arg call_id_get_kobj_id()               { return 25; }
 
 
 	/*****************************************************************
@@ -402,6 +403,16 @@ namespace Kernel {
 	}
 
 	/**
+	 * Get the kernel object ID of an object
+	 *
+	 * \param cap capability ID of the object
+	 */
+	inline void get_kobj_id(capid_t cap)
+	{
+		call(call_id_get_kobj_id(), cap);
+	}
+
+	/**
 	 * Delete a capability ID
 	 *
 	 * \param cap  capability ID to delete
@@ -447,6 +458,7 @@ namespace Kernel {
 	{
 		return bool(call(call_id_suspend(), sleep_type));
 	}
+
 }
 
 #endif /* _INCLUDE__KERNEL__INTERFACE_H_ */

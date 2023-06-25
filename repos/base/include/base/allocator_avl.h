@@ -428,11 +428,11 @@ class Genode::Allocator_avl_tpl : public Allocator_avl_base
 									   if (b.used())
 									   {
 										   BMDT *md = metadata((void *)b.addr());
-										   Genode::log("\tfor_each_metadata: b", b.addr(), "md:", md);
 										   fn((BMDT &)*md);
 										   return;
-									   }
-									   Genode::log("\tFound unused block");
+									   } else {
+										   Genode::log("\tFound unused block at ", Hex(b.addr()));
+								   }
 								   });
 		}
 

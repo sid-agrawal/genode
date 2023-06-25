@@ -32,6 +32,7 @@ namespace Kernel {
 	 * Kernel backend of protection domains
 	 */
 	class Pd;
+	static unsigned global_pd_id = 0;
 }
 
 
@@ -45,6 +46,7 @@ class Kernel::Pd
 
 	private:
 
+		unsigned _pd_id = 0;
 		Kernel::Object                 _kernel_object { *this };
 		Hw::Page_table                &_table;
 		Core::Platform_pd             &_platform_pd;
@@ -69,6 +71,8 @@ class Kernel::Pd
 			_platform_pd(platform_pd),
 			mmu_regs((addr_t)&table, addr_space_id_alloc)
 		{
+			_pd_id = global_pd_id;
+			global_pd_id++;
 			capid_t invalid = (capid_t)_capid_alloc.alloc();
 			assert(invalid == cap_id_invalid());
 		}
@@ -106,6 +110,7 @@ class Kernel::Pd
 		Hw::Page_table      &translation_table()   { return _table;       }
 		Capid_allocator     &capid_alloc()         { return _capid_alloc; }
 		Object_identity_reference_tree &cap_tree() { return _cap_tree;    }
+		unsigned pd_id() { return _pd_id;    }
 };
 
 #endif /* _CORE__KERNEL__PD_H_ */

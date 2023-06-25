@@ -58,6 +58,9 @@ class Core::Core_env : public Env_deprecated, Noncopyable
 
 		Core_env()
 		:
+			/* In a normal thread, this is the _pd_session, of the session from
+			whose quota the caps are  to be allocated.
+			But in the care of core, it is NULL. Since all of these are just billed to the core's rpc-factory.*/
 			_entrypoint(nullptr, ENTRYPOINT_STACK_SIZE, "entrypoint",
 			            Affinity::Location()),
 			_region_map(_entrypoint),

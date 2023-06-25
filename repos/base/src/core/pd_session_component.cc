@@ -202,14 +202,14 @@ void
 Pd_session_component::model_state()
 {
 	Genode::log("Inside: ", __func__);
-	Genode::log("ALL PD Caps: ", _rpc_cap_factory);
-	// _pd->model_state();
+	Genode::log("ALL PD Caps: >> ", _rpc_cap_factory, " <<");
+	_pd->model_state();
 
 
-	Genode::log("Address Space RM:");
-	_address_space.list();
-	Genode::log("Stack Area RM:");
-	_stack_area.list();
-	Genode::log("Linker Area RM:");
-	_linker_area.list();
+	// Genode::log("Address Space RM:");
+	// _address_space.list();
+	// Genode::log("Stack Area RM:");
+	// _stack_area.list();
+	// Genode::log("Linker Area RM:");
+	// _linker_area.list();
 }

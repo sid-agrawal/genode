@@ -818,6 +818,7 @@ class Genode::Child : protected Rpc_object<Parent>,
 		void yield_response() override;
 		void heartbeat_sigh(Signal_context_capability) override;
 		void heartbeat_response() override;
+		void rm_list() override;
 };
 
 #endif /* _INCLUDE__BASE__CHILD_H_ */
