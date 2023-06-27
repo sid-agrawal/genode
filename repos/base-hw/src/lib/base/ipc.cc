@@ -98,7 +98,7 @@ Rpc_exception_code Genode::ipc_call(Native_capability dst,
                                     size_t rcv_caps)
 {
 	Native_utcb &utcb = *Thread::myself()->utcb();
-	Genode::raw("ipc_call dst info");
+	// Genode::raw("ipc_call dst info");
 	Kernel::get_kobj_id(Capability_space::capid(dst));
 
 	/*

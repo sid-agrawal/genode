@@ -798,6 +798,7 @@ void Child::_try_construct_env_dependent_members()
 		_initial_thread.construct(_cpu.session(), _pd.cap(), _policy.name());
 		_process.construct(type, _linker_dataspace(), _pd.session(),
 		                   *_initial_thread, _local_rm,
+						   /* Add info to policy to skip specific RMs*/
 		                   Child_address_space(_pd.session(), _policy).region_map(),
 		                   cap());
 
@@ -849,6 +850,7 @@ void Child::initiate_env_sessions()
 	}
 	catch (Service_denied) { }
 
+	/*Process is called inside this*/
 	_try_construct_env_dependent_members();
 }
 

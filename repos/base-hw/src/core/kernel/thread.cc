@@ -754,9 +754,9 @@ void Thread::_call_get_kobj_id()
 		user_arg_0(cap_id_invalid());
 		return;
 	}
-	Genode::raw("For: ", user_arg_1(), " found: ");
-	Genode::raw("capid: ", ref->capid(), " object: ", ref->object<Thread>(),
-	" in pd: ", ref->pd().pd_id(), " listening PD: ", ref->object<Thread>()->pd().pd_id());
+	// Genode::raw("For: ", user_arg_1(), " found: ");
+	// Genode::raw("capid: ", ref->capid(), " object: ", ref->object<Thread>(),
+	// " in pd: ", ref->pd().pd_id(), " listening PD: ", ref->object<Thread>()->pd().pd_id());
 }
 
 void Thread::_call_delete_obj()
