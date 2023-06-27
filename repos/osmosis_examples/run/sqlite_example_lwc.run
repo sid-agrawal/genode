@@ -14,14 +14,6 @@ install_config {
 		</default-route>
 		<start name="lwc_sqlite_example" caps="110">
 			<resource name="RAM" quantum="10M"/>
-			<route>
-				<service name="Hello"> <child name="lwc1"/> </service>
-<service name="PD"> <parent/> </service>
-<service name="ROM"> <parent/> </service>
-<service name="RM"> <parent/> </service>
-<service name="CPU"> <parent/> </service>
-<service name="LOG"> <parent/> </service>
-			</route>
 		</start>
 	</config>
 }

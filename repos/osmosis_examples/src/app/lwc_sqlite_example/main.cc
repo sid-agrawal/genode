@@ -1,21 +1,17 @@
 /*
- * \brief  Test program for raising and handling region-manager faults
- * \author Norman Feske
- * \date   2008-09-24
+ * \brief  Test program for starting a server in the child
+ * \author Sidhartha Agrawal
+ * \date   2023-06-27
  *
  * This program starts itself as child. When started, it first determines
  * wheather it is parent or child by requesting a RM session. Because the
  * program blocks all session-creation calls for the RM service, each program
  * instance can determine its parent or child role by the checking the result
  * of the session creation.
+ *
+ * Then the child starts a server and the parents make a call to this server.
  */
 
-/*
- * Copyright (C) 2008-2017 Genode Labs GmbH
- *
- * This file is part of the Genode OS framework, which is distributed
- * under the terms of the GNU Affero General Public License version 3.
- */
 
 #include <base/component.h>
 #include <base/log.h>
@@ -27,6 +23,8 @@
 
 #include <hello_session/connection.h>
 #include <pd_session/connection.h>
+
+#include <os/session_requester.h>
 
 using namespace Genode;
 
@@ -98,6 +96,8 @@ class Test_child_policy : public Child_policy
 		Env                            &_env;
 		Parent_services                &_parent_services;
 
+		// Genode::Session_requester _session_requester{_env.ep().rpc_ep(), _env.ram(), _env.rm()};
+
 		Service &_matching_service(Service::Name const &name)
 		{
 			Service *service = nullptr;
@@ -120,10 +120,7 @@ class Test_child_policy : public Child_policy
 		:
 			_env(env),
 			_parent_services(parent_services)
-		{
-
-			announce_service("Hello");
-		}
+		{ }
 
 
 		/****************************
@@ -153,6 +150,12 @@ class Test_child_policy : public Child_policy
 			return Route { .service = _matching_service(name),
 			               .label   = label,
 			               .diag    = diag };
+		}
+
+		void announce_service(Genode::Service::Name const &service_name) override
+		{
+			Genode::log("announce_service: ", service_name.string());
+			/* I think something needs to change here*/
 		}
 };
 
@@ -188,31 +191,21 @@ struct Main_parent
 
 	/* create child */
 	Test_child_policy _child_policy { _env, _parent_services };
+	Child _child { _env.rm(), _env.ep().rpc_ep(), _child_policy };
 
-	 Child _child { _env.rm(), _env.ep().rpc_ep(), _child_policy };
+	/* Move the Child constructor out of the parent's constructor*/
 
 
 	Main_parent(Env &env) : _env(env) {
-
 		Genode::log("Parent constructor");
+		Hello::Connection hello(env);
+		hello.say_hello();
 	 }
 };
 
 
-void main_parent(Env &env)
-{
-	Genode::log("-- in main_parent --");
-
-	Hello::Connection hello(env);
-	Genode::warning("Calling the LWC from the parent");
-
-	hello.say_hello();
-}
-
 void Component::construct(Env &env)
 {
-	log("--- lwc example started ---");
-
 	try {
 		/*
 		 * Distinguish parent from child by requesting an service that is only
@@ -220,31 +213,8 @@ void Component::construct(Env &env)
 		 */
 		Rm_connection rm(env);
 		static Main_parent parent(env);
-
-		main_parent(env);
-
-		// Parent calling hello
 	}
 	catch (Service_denied) {
 		main_child(env);
 	}
 }
-
-/*
-
-RPC_Cap LWC_Create(func to involve in the child, what to share ) {
-
-	1. Create a new Child
-    2. The new child will have a new service
-	3. This new service will show up in the Test Child policy somehow.
-}
-
-LWC_SWITCH(RPC_Cap) {
-	1. Switch to the child
-	2. Call the function
-	3. Switch back to the parent
-}
-
-
-
-*/
