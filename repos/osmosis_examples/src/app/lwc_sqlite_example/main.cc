@@ -38,11 +38,6 @@ namespace Hello {
 /***********
  ** Child **
  ***********/
-int encrypt(){
-	Genode::log("foo, excrypted");
-	return 0;
-}
-
 struct Hello::Session_component : Genode::Rpc_object<Session>
 {
 	void say_hello() override {
@@ -78,11 +73,12 @@ class Hello::Root_component
 
 void main_child(Env &env)
 {
-	Genode::log("Starting child, calling foo: ", encrypt());
+	Genode::log("Starting child, calling foo: ");
 	Genode::Sliced_heap sliced_heap { env.ram(), env.rm() };
 
+	/* Create a root server component and imform your parent */
 	Hello::Root_component root { env.ep(), sliced_heap };
-		env.parent().announce(env.ep().manage(root));
+	env.parent().announce(env.ep().manage(root));
 }
 
 
@@ -124,7 +120,10 @@ class Test_child_policy : public Child_policy
 		:
 			_env(env),
 			_parent_services(parent_services)
-		{ }
+		{
+
+			announce_service("Hello");
+		}
 
 
 		/****************************
@@ -190,35 +189,29 @@ struct Main_parent
 	/* create child */
 	Test_child_policy _child_policy { _env, _parent_services };
 
-	Child _child { _env.rm(), _env.ep().rpc_ep(), _child_policy };
+	 Child _child { _env.rm(), _env.ep().rpc_ep(), _child_policy };
 
-	Region_map_client _address_space { _child.pd().address_space() };
-
-	/* dataspace used for creating shared memory between parent and child */
-	Attached_ram_dataspace _ds { _env.ram(), _env.rm(), 4096 };
 
 	Main_parent(Env &env) : _env(env) {
 
-		Genode::log("Starting parent");
-		void main_parent(Env &env);
+		Genode::log("Parent constructor");
 	 }
 };
 
 
 void main_parent(Env &env)
 {
-	Genode::log("-- parent role started --");
+	Genode::log("-- in main_parent --");
 
-	Genode::log("Client started");
 	Hello::Connection hello(env);
-	Genode::log("2-Client started");
+	Genode::warning("Calling the LWC from the parent");
 
 	hello.say_hello();
 }
 
 void Component::construct(Env &env)
 {
-	log("--- region-manager fault test ---");
+	log("--- lwc example started ---");
 
 	try {
 		/*
@@ -227,7 +220,10 @@ void Component::construct(Env &env)
 		 */
 		Rm_connection rm(env);
 		static Main_parent parent(env);
-		Genode::log("-- parent role started --");
+
+		main_parent(env);
+
+		// Parent calling hello
 	}
 	catch (Service_denied) {
 		main_child(env);

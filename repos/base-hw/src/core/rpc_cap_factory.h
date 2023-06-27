@@ -101,8 +101,8 @@ class Core::Rpc_cap_factory
 
 					/* store it in the list and return result */
 					_list.insert(&obj);
-					Genode::log("^^^^^allocating RPC capability ", obj.cap.local_name(), " for _ep: ", ep.local_name());
-					printTypeInfo(obj.cap);
+					// Genode::log("^^^^^allocating RPC capability ", obj.cap.local_name(), " for _ep: ", ep.local_name());
+					// printTypeInfo(obj.cap);
 					return obj.cap;
 				},
 				[&] (Allocator::Alloc_error) -> Native_capability {

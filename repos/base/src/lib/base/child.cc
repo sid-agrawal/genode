@@ -749,8 +749,8 @@ namespace {
 			_rm_client(pd.address_space()),
 			_rm(policy.address_space(pd) ? *policy.address_space(pd) : _rm_client)
 		{
-			Genode::log("For child: ", policy.name(),
-			"and policy.address_space()", policy.address_space(pd));
+			// Genode::log("For child: ", policy.name(),
+			// "and policy.address_space()", policy.address_space(pd));
 		}
 
 		Region_map &region_map() { return _rm; }
